@@ -3,7 +3,7 @@ created @ 2021-02-03
 0.  this project is designed to calculate some frequently used basic data for futures
 """
 
-BGN_DATE, STP_DATE = "20120101", "20210913"
+BGN_DATE, STP_DATE = "20120101", "20211011"
 SIMU_BGN_DATE, SIMU_STP_DATE = "20150101", STP_DATE
 
 # universe

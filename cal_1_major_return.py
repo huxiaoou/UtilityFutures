@@ -10,7 +10,7 @@ updated @ 2021-02-08
         major return [T]  = close[T] / close[T-1]
     this return may not be executable in reality because AT/BEFORE the close time point of T-1, we do not know which
     contract would be major at T yet, and we only knew the results AFTER the close time point.
-2.  this results can not be used to guide the simulation, but can be in used in some quick test. 
+2.  this results is not tradable or realizable, but can be used as a market index replacement. 
 3.  the output of this script can be replaced by MARKET INDEX some times.
 '''
 
