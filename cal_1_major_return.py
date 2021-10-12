@@ -56,9 +56,16 @@ input_df["major_return"] = input_df[[this_prc_lbl, prev_prc_lbl]].apply(
     cal_major_return, t_this_prc_lbl=this_prc_lbl, t_prev_prc_lbl=prev_prc_lbl, t_rtn_scale=RETURN_SCALE,
     axis=1
 )
+input_df["mkt_idx"] = (input_df["major_return"] / RETURN_SCALE + 1).cumprod()
+
 major_return_df = input_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return"]]
 major_return_file = "major_return.{}.{}.csv.gz".format(instrument_id, price_type)
 major_return_path = os.path.join(MAJOR_RETURN_DIR, major_return_file)
 major_return_df.to_csv(major_return_path, float_format="%.8f", compression="gzip")
+
+custom_mkt_idx_df = input_df[["mkt_idx"]].rename(mapper={"mkt_idx": price_type.upper()}, axis=1)
+custom_mkt_idx_file = "{}.index.csv.gz".format(instrument_id)
+custom_mkt_idx_path = os.path.join(MKT_IDX_DIR, custom_mkt_idx_file)
+custom_mkt_idx_df.to_csv(custom_mkt_idx_path, float_format="%.8f", compression="gzip")
 
 print("| {} | {:>6s} | {} | Major return calculated |".format(dt.datetime.now(), instrument_id, price_type))

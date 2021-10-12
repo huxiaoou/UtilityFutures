@@ -10,6 +10,8 @@ FUTURES_DIR = os.path.join(DATABASE, "Futures")
 FUTURES_INSTRUMENT_MKT_DATA_DIR = os.path.join(FUTURES_DIR, "instrument_mkt_data")
 MAJOR_MINOR_DIR = os.path.join(FUTURES_DIR, "by_instrument", "major_minor")
 MAJOR_RETURN_DIR = os.path.join(FUTURES_DIR, "by_instrument", "major_return")
+MKT_IDX_DIR = os.path.join(FUTURES_DIR, "by_instrument", "index", "CUSTOM")
+
 MD_DIR = os.path.join(FUTURES_DIR, "by_instrument", "md")
 
 INSTRUMENT_BGN_DATE = {
