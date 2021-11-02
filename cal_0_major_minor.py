@@ -1,6 +1,6 @@
 from setup import *
 from custom_funs import czc_contract_id_recover, czc_contract_id_expand
-from configure import BGN_DATE, STP_DATE, VOLUME_MOVING_AVER_N
+from configure import BGN_DATE, VOLUME_MOVING_AVER_N
 from skyrim.whiterun import CCalendar
 
 '''
@@ -10,6 +10,8 @@ created @ 2021-02-03
 '''
 
 instrument_id = sys.argv[1]
+STP_DATE = sys.argv[2]
+
 exchange_id = instrument_id.split(".")[1]
 instrument_id_len = len(instrument_id.split(".")[0])
 

@@ -1,5 +1,5 @@
 from setup import *
-from configure import SIMU_BGN_DATE, SIMU_STP_DATE
+from configure import SIMU_BGN_DATE
 from skyrim.whiterun import CCalendar
 
 '''
@@ -10,6 +10,7 @@ created @ 2021-02-08
 '''
 
 instrument_id = sys.argv[1]
+SIMU_STP_DATE = sys.argv[2]
 exchange_id = instrument_id.split(".")[1]
 instrument_id_len = len(instrument_id.split(".")[0])
 
