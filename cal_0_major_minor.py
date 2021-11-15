@@ -45,6 +45,8 @@ for trade_date in volume_mov_aver_df.index:
     # update near and distant contract
     t_oi_srs = volume_mov_aver_df.loc[trade_date]
     n_contract = t_oi_srs.idxmax()
+    if n_contract.split(".")[0][-4:] < trade_date[2:6]:
+        n_contract = pre_n_contract
     d_contract = t_oi_srs[t_oi_srs.index > n_contract].idxmax()
 
     # append to data
