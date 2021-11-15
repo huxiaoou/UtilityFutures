@@ -34,4 +34,4 @@ for price_type in ["open", "close"]:
     price_path = os.path.join(MD_DIR, price_file)
     price_df.to_csv(price_path, float_format="%.2f", compression="gzip")
 
-    print("| {} | {:>6s} | {:>5s} | md reformat |".format(dt.datetime.now(), instrument_id, price_type))
+    print("| {} | {:>6s} | {:>8s} | md reformat |".format(dt.datetime.now(), instrument_id, price_type))

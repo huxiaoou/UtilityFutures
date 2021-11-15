@@ -68,4 +68,4 @@ custom_mkt_idx_file = "{}.index.csv.gz".format(instrument_id)
 custom_mkt_idx_path = os.path.join(MKT_IDX_DIR, custom_mkt_idx_file)
 custom_mkt_idx_df.to_csv(custom_mkt_idx_path, float_format="%.8f", compression="gzip")
 
-print("| {} | {:>6s} | {} | Major return calculated |".format(dt.datetime.now(), instrument_id, price_type))
+print("| {} | {:>6s} | {:>8s} | Major return calculated |".format(dt.datetime.now(), instrument_id, price_type))
