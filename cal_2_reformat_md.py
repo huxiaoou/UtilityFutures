@@ -29,7 +29,7 @@ for price_type in ["open", "close"]:
         md_dfs_list.append(instrument_md_df)
 
     md_df = pd.concat(md_dfs_list, axis=0, ignore_index=True)
-    price_df = pd.pivot_table(data=md_df, values=price_type, index="trade_date", columns="contract")
+    price_df = pd.pivot_table(data=md_df, values=price_type, index="trade_date", columns="contract", dropna=False)
     price_file = "{}.md.{}.csv.gz".format(instrument_id, price_type)
     price_path = os.path.join(MD_DIR, price_file)
     price_df.to_csv(price_path, float_format="%.2f", compression="gzip")
