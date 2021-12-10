@@ -5,7 +5,7 @@ from time import sleep
 
 stp_date = sys.argv[1]
 
-for instrument_id in CONCERNED_INSTRUMENT_UNIVERSE[0:1]:
+for instrument_id in CONCERNED_INSTRUMENT_UNIVERSE:
     sleep(1)
     subprocess.run(["python", "cal_0_major_minor.py", instrument_id, stp_date])
     sleep(1)
