@@ -36,9 +36,15 @@ python cal_2_reformat_md.py RU.SHF $stp_date >> .\log\manual.log
 python cal_0_major_minor.py BU.SHF $stp_date >> .\log\manual.log
 python cal_1_major_return.py BU.SHF >> .\log\manual.log
 python cal_2_reformat_md.py BU.SHF $stp_date >> .\log\manual.log
+python cal_0_major_minor.py FU.SHF $stp_date >> .\log\manual.log
+python cal_1_major_return.py FU.SHF >> .\log\manual.log
+python cal_2_reformat_md.py FU.SHF $stp_date >> .\log\manual.log
 python cal_0_major_minor.py SP.SHF $stp_date >> .\log\manual.log
 python cal_1_major_return.py SP.SHF >> .\log\manual.log
 python cal_2_reformat_md.py SP.SHF $stp_date >> .\log\manual.log
+python cal_0_major_minor.py SS.SHF $stp_date >> .\log\manual.log
+python cal_1_major_return.py SS.SHF >> .\log\manual.log
+python cal_2_reformat_md.py SS.SHF $stp_date >> .\log\manual.log
 python cal_0_major_minor.py M.DCE $stp_date >> .\log\manual.log
 python cal_1_major_return.py M.DCE >> .\log\manual.log
 python cal_2_reformat_md.py M.DCE $stp_date >> .\log\manual.log
@@ -87,6 +93,9 @@ python cal_2_reformat_md.py I.DCE $stp_date >> .\log\manual.log
 python cal_0_major_minor.py JD.DCE $stp_date >> .\log\manual.log
 python cal_1_major_return.py JD.DCE >> .\log\manual.log
 python cal_2_reformat_md.py JD.DCE $stp_date >> .\log\manual.log
+python cal_0_major_minor.py RR.DCE $stp_date >> .\log\manual.log
+python cal_1_major_return.py RR.DCE >> .\log\manual.log
+python cal_2_reformat_md.py RR.DCE $stp_date >> .\log\manual.log
 python cal_0_major_minor.py SR.CZC $stp_date >> .\log\manual.log
 python cal_1_major_return.py SR.CZC >> .\log\manual.log
 python cal_2_reformat_md.py SR.CZC $stp_date >> .\log\manual.log

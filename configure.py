@@ -1,3 +1,4 @@
+# noinspection GrazieInspection
 """
 created @ 2021-02-03
 0.  this project is designed to calculate some frequently used basic data for futures
@@ -20,7 +21,9 @@ CONCERNED_INSTRUMENT_UNIVERSE = [
     "HC.SHF",  # "20140321"
     "RU.SHF",  # "19950516"
     "BU.SHF",  # "20131009"
+    "FU.SHF",  # "20040825"  # re-active since 20180801
     "SP.SHF",  # "20181127"
+    "SS.SHF",  # "20190925"
     "M.DCE",  # "20000717"
     "Y.DCE",  # "20060109"
     "A.DCE",  # "19990104"
@@ -37,6 +40,7 @@ CONCERNED_INSTRUMENT_UNIVERSE = [
     "JM.DCE",  # "20130322"
     "I.DCE",  # "20131018"
     "JD.DCE",  # "20131108"
+    "RR.DCE",  # "20190816"
     "SR.CZC",  # "20060106"
     "CF.CZC",  # "20040601"
     "CY.CZC",  # "20170808"
@@ -53,7 +57,7 @@ CONCERNED_INSTRUMENT_UNIVERSE = [
     "OI.CZC",  # "20130423"
     "RM.CZC",  # "20121228"
 ]
-CIU_SIZE = len(CONCERNED_INSTRUMENT_UNIVERSE)  # should be 30
+CIU_SIZE = len(CONCERNED_INSTRUMENT_UNIVERSE)  # should be 47
 
 # major
 VOLUME_MOVING_AVER_N = 3
