@@ -11,6 +11,7 @@ FUTURES_INSTRUMENT_MKT_DATA_DIR = os.path.join(FUTURES_DIR, "instrument_mkt_data
 MAJOR_MINOR_DIR = os.path.join(FUTURES_DIR, "by_instrument", "major_minor")
 MAJOR_RETURN_DIR = os.path.join(FUTURES_DIR, "by_instrument", "major_return")
 MKT_IDX_DIR = os.path.join(FUTURES_DIR, "by_instrument", "index", "CUSTOM")
+EXTRA_DATA_DIR = os.path.join(FUTURES_DIR, "by_instrument", "extra_data")
 
 MD_DIR = os.path.join(FUTURES_DIR, "by_instrument", "md")
 

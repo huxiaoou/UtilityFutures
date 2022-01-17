@@ -141,3 +141,5 @@ python cal_2_reformat_md.py OI.CZC $stp_date >> .\log\manual.log
 python cal_0_major_minor.py RM.CZC $stp_date >> .\log\manual.log
 python cal_1_major_return.py RM.CZC >> .\log\manual.log
 python cal_2_reformat_md.py RM.CZC $stp_date >> .\log\manual.log
+
+python cal_3_extra_data_by_instrument.py $stp_date >> .\log\manual.log
