@@ -7,6 +7,8 @@ from skyrim.whiterun import CCalendar
 created @ 2021-02-03
 0.  this script only decide which contract is major and which is minor on T day
     so if we just want always trade major contract, the results will help
+updated @ 2022-02-15
+1.  change volume delay from 1 to 2, so that major return is executable
 '''
 
 instrument_id = sys.argv[1]
@@ -33,8 +35,8 @@ md_df = pd.concat(md_dfs_list, axis=0, ignore_index=True)
 pivot_volume_df = pd.pivot_table(data=md_df, values="volume", index="trade_date", columns="contract").fillna(0)
 pivot_volume_df_sorted = pivot_volume_df.sort_index(axis=1).sort_index(axis=0)
 volume_mov_aver_df = pivot_volume_df_sorted.rolling(window=VOLUME_MOVING_AVER_N).mean()
-volume_mov_aver_df = volume_mov_aver_df.shift(1)
-volume_mov_aver_df = volume_mov_aver_df.fillna(method="bfill")  # for first row
+volume_mov_aver_df = volume_mov_aver_df.shift(2)
+volume_mov_aver_df = volume_mov_aver_df.fillna(method="bfill")  # for first 2 rows
 
 # main loop to get major and minor contracts
 n_contract = pre_n_contract = None

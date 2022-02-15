@@ -12,6 +12,10 @@ updated @ 2021-02-08
     contract would be major at T yet, and we only knew the results AFTER the close time point.
 2.  this results is not tradable or realizable, but can be used as a market index replacement. 
 3.  the output of this script can be replaced by MARKET INDEX some times.
+
+updated @ 2022-02-15
+1.  due to the change in cal_0_major_minor, this return is executable
+2.  add some daily market data to this table 
 '''
 
 # --- basic settings
@@ -24,9 +28,11 @@ prev_prc_lbl = "prev_{}".format(price_type)
 input_file = "major.minor.{}.csv.gz".format(instrument_id)
 input_path = os.path.join(MAJOR_MINOR_DIR, input_file)
 input_df = pd.read_csv(input_path, dtype={"trade_date": str})
-input_df["major_rtn_contract"] = input_df["n_contract"].shift(1).fillna(method="bfill")
+input_df["major_rtn_contract"] = input_df["n_contract"]
 input_df[this_prc_lbl] = None
 input_df[prev_prc_lbl] = None
+input_df["volume"] = 0
+input_df["oi"] = 0
 input_df = input_df.set_index("trade_date")
 
 # --- update price
@@ -38,16 +44,22 @@ for this_trade_date in input_df.index:
     this_md_path = os.path.join(FUTURES_INSTRUMENT_MKT_DATA_DIR, this_trade_date[0:4], this_trade_date, this_md_file)
     this_md_df = pd.read_csv(this_md_path).set_index("contract")
 
+    vo_adj_ratio = 2 if this_trade_date < "20200101" else 1
+
     m_contract = input_df.at[this_trade_date, "major_rtn_contract"]
     m_this_price = this_md_df.at[m_contract, price_type]
+    m_this_volume = this_md_df.at[m_contract, "volume"] / vo_adj_ratio
+    m_this_oi = this_md_df.at[m_contract, "oi"] / vo_adj_ratio
     if prev_md_df is not None:
         m_prev_price = prev_md_df.at[m_contract, price_type]
     else:
         m_prev_price = m_this_price
-        print("| {} | {:>6s} | {} | prev date md missing |".format(dt.datetime.now(), instrument_id, this_trade_date))
+        print("| {} | {:>6s} | {} | prev date md missing    |".format(dt.datetime.now(), instrument_id, this_trade_date))
 
     input_df.at[this_trade_date, this_prc_lbl] = m_this_price
     input_df.at[this_trade_date, prev_prc_lbl] = m_prev_price
+    input_df.at[this_trade_date, "volume"] = m_this_volume
+    input_df.at[this_trade_date, "oi"] = m_this_oi
 
     # for next day
     prev_md_df = this_md_df
@@ -58,7 +70,7 @@ input_df["major_return"] = input_df[[this_prc_lbl, prev_prc_lbl]].apply(
 )
 input_df["mkt_idx"] = (input_df["major_return"] / RETURN_SCALE + 1).cumprod()
 
-major_return_df = input_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return"]]
+major_return_df = input_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return", "volume", "oi"]]
 major_return_file = "major_return.{}.{}.csv.gz".format(instrument_id, price_type)
 major_return_path = os.path.join(MAJOR_RETURN_DIR, major_return_file)
 major_return_df.to_csv(major_return_path, float_format="%.8f", compression="gzip")
