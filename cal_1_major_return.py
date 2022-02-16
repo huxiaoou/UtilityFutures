@@ -70,7 +70,7 @@ input_df["major_return"] = input_df[[this_prc_lbl, prev_prc_lbl]].apply(
 )
 input_df["mkt_idx"] = (input_df["major_return"] / RETURN_SCALE + 1).cumprod()
 
-major_return_df = input_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return", "volume", "oi"]]
+major_return_df = input_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return", "volume", "oi", "mkt_idx"]]
 major_return_file = "major_return.{}.{}.csv.gz".format(instrument_id, price_type)
 major_return_path = os.path.join(MAJOR_RETURN_DIR, major_return_file)
 major_return_df.to_csv(major_return_path, float_format="%.8f", compression="gzip")
