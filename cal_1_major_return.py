@@ -32,6 +32,7 @@ input_df["major_rtn_contract"] = input_df["n_contract"]
 input_df[this_prc_lbl] = None
 input_df[prev_prc_lbl] = None
 input_df["volume"] = 0
+input_df["amt"] = 0
 input_df["oi"] = 0
 input_df = input_df.set_index("trade_date")
 
@@ -49,7 +50,9 @@ for this_trade_date in input_df.index:
     m_contract = input_df.at[this_trade_date, "major_rtn_contract"]
     m_this_price = this_md_df.at[m_contract, price_type]
     m_this_volume = this_md_df.at[m_contract, "volume"] / vo_adj_ratio
+    m_this_amt = 0 if np.isnan(this_md_df.at[m_contract, "amt"]) else this_md_df.at[m_contract, "amt"] / vo_adj_ratio
     m_this_oi = this_md_df.at[m_contract, "oi"] / vo_adj_ratio
+
     if prev_md_df is not None:
         m_prev_price = prev_md_df.at[m_contract, price_type]
     else:
@@ -59,22 +62,26 @@ for this_trade_date in input_df.index:
     input_df.at[this_trade_date, this_prc_lbl] = m_this_price
     input_df.at[this_trade_date, prev_prc_lbl] = m_prev_price
     input_df.at[this_trade_date, "volume"] = m_this_volume
+    input_df.at[this_trade_date, "amt"] = m_this_amt
     input_df.at[this_trade_date, "oi"] = m_this_oi
 
     # for next day
     prev_md_df = this_md_df
 
+# --- major return
 input_df["major_return"] = input_df[[this_prc_lbl, prev_prc_lbl]].apply(
     cal_major_return, t_this_prc_lbl=this_prc_lbl, t_prev_prc_lbl=prev_prc_lbl, t_rtn_scale=RETURN_SCALE,
     axis=1
 )
 input_df["mkt_idx"] = (input_df["major_return"] / RETURN_SCALE + 1).cumprod()
 
-major_return_df = input_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return", "volume", "oi", "mkt_idx"]]
+# --- reformat and save
+major_return_df = input_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return", "volume", "amt", "oi", "mkt_idx"]]
 major_return_file = "major_return.{}.{}.csv.gz".format(instrument_id, price_type)
 major_return_path = os.path.join(MAJOR_RETURN_DIR, major_return_file)
 major_return_df.to_csv(major_return_path, float_format="%.8f", compression="gzip")
 
+# --- custom market return
 custom_mkt_idx_df = input_df[["mkt_idx"]].rename(mapper={"mkt_idx": price_type.upper()}, axis=1)
 custom_mkt_idx_file = "{}.index.csv.gz".format(instrument_id)
 custom_mkt_idx_path = os.path.join(MKT_IDX_DIR, custom_mkt_idx_file)
