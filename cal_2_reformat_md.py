@@ -9,7 +9,7 @@ created @ 2021-02-08
 1.  the results of this script provide some basic input for precise daily simulation
 '''
 
-instrument_id = sys.argv[1]
+instrument_id = sys.argv[1].upper()
 SIMU_STP_DATE = sys.argv[2]
 exchange_id = instrument_id.split(".")[1]
 instrument_id_len = len(instrument_id.split(".")[0])

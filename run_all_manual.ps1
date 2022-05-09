@@ -1,5 +1,5 @@
 $stp_date = Read-Host -Prompt "Please input the stp date, format = [YYYYMMDDD]"
-#python run_all.py $stp_date >> .\log\manual.log
+# python run_all.py $stp_date >> .\log\manual.log
 python cal_0_major_minor.py AU.SHF $stp_date >> .\log\manual.log
 python cal_1_major_return.py AU.SHF >> .\log\manual.log
 python cal_2_reformat_md.py AU.SHF $stp_date >> .\log\manual.log

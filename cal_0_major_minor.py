@@ -11,7 +11,7 @@ updated @ 2022-02-15
 1.  change volume delay from 1 to 2, so that major return is executable
 '''
 
-instrument_id = sys.argv[1]
+instrument_id = sys.argv[1].upper()
 STP_DATE = sys.argv[2]
 
 exchange_id = instrument_id.split(".")[1]

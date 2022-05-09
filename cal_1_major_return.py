@@ -19,7 +19,7 @@ updated @ 2022-02-15
 '''
 
 # --- basic settings
-instrument_id = sys.argv[1]
+instrument_id = sys.argv[1].upper()
 price_type = "close"
 this_prc_lbl = "this_{}".format(price_type)
 prev_prc_lbl = "prev_{}".format(price_type)
@@ -40,6 +40,7 @@ input_df = input_df.set_index("trade_date")
 prev_trade_date = None
 prev_md_df = None
 for this_trade_date in input_df.index:
+    # print(this_trade_date)
     trade_year = this_trade_date[0:4]
     this_md_file = "{}.cnf.{}.md.csv.gz".format(this_trade_date, instrument_id)
     this_md_path = os.path.join(FUTURES_INSTRUMENT_MKT_DATA_DIR, this_trade_date[0:4], this_trade_date, this_md_file)

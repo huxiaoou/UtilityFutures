@@ -4,7 +4,9 @@ import numpy as np
 import pandas as pd
 import datetime as dt
 
-DATABASE = os.path.join("E:\\", "Database")
+# DATABASE = os.path.join("E:\\", "Database")
+DATABASE = os.path.join("C:\\", "Users", "huxia", "OneDrive", "文档", "Trading", "Database")
+
 CALENDAR_DIR = os.path.join(DATABASE, "Calendar")
 FUTURES_DIR = os.path.join(DATABASE, "Futures")
 FUTURES_INSTRUMENT_MKT_DATA_DIR = os.path.join(FUTURES_DIR, "instrument_mkt_data")
@@ -19,7 +21,8 @@ INSTRUMENT_BGN_DATE = {
     "AL.SHF": "19950417",
     "CU.SHF": "19950417",
     "RU.SHF": "19950516",
-    "A.DCE": "19990104",
+    # "A.DCE": "19990104",
+    "A.DCE": "20120105",
     "M.DCE": "20000717",
     "CF.CZC": "20040601",
     "FU.SHF": "20180801",  # "20040825",

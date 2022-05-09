@@ -7,7 +7,7 @@ created @ 2022-01-17
 0.  this script will reorganize extra data from by-date to by-instrument
 '''
 
-STP_DATE = sys.argv[1]
+STP_DATE = sys.argv[1].upper()
 
 calendar_cne = CCalendar(os.path.join(CALENDAR_DIR, "cne_calendar.csv"))
 
