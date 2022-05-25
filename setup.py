@@ -1,8 +1,11 @@
 import os
 import sys
+import subprocess
 import numpy as np
 import pandas as pd
 import datetime as dt
+
+pd.set_option("display.width", 0)
 
 # DATABASE = os.path.join("E:\\", "Database")
 DATABASE = os.path.join("C:\\", "Users", "huxia", "OneDrive", "文档", "Trading", "Database")
