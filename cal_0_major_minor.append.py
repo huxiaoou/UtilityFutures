@@ -71,8 +71,10 @@ old_df = pd.read_csv(save_path, dtype=str)
 save_df = pd.concat([old_df, major_minor_df.reset_index().rename(mapper={"index": "trade_date"}, axis=1)])
 save_df = save_df.drop_duplicates(keep="first").sort_values("trade_date", ascending=True)
 
-# print(old_df.tail())
-# print(save_df.tail())
+print("size before update:{}".format(len(old_df)))
+print("size after  update:{}".format(len(save_df)))
+print(old_df.tail())
+print(save_df.tail())
 
 save_df = save_df.set_index("trade_date")
 save_df.to_csv(save_path, index_label="trade_date", compression="gzip")

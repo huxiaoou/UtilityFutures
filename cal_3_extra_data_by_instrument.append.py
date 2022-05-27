@@ -39,6 +39,8 @@ for instrument, instrument_df in df.groupby(by="instrument"):
         sorted_instrument_df
     ]).drop_duplicates(keep="first")
 
+    print("size before update:{}".format(len(old_sorted_instrument_df)))
+    print("size after  update:{}".format(len(new_sorted_instrument_df)))
     print(old_sorted_instrument_df.tail())
     print(new_sorted_instrument_df.tail())
 

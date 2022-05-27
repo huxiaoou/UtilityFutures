@@ -81,8 +81,11 @@ new_major_return_df = new_major_return_df.drop_duplicates(keep="first").sort_val
 new_major_return_df["mkt_idx"] = (new_major_return_df["major_return"] / RETURN_SCALE + 1).cumprod()
 
 # --- reformat and save
-# print(old_major_return_df.tail())
-# print(new_major_return_df.tail())
+print("size before update:{}".format(len(old_major_return_df)))
+print("size after  update:{}".format(len(new_major_return_df)))
+print(old_major_return_df.tail())
+print(new_major_return_df.tail())
+
 new_major_return_df = new_major_return_df.set_index("trade_date")
 new_major_return_df = new_major_return_df[["n_contract", "major_rtn_contract", this_prc_lbl, prev_prc_lbl, "major_return", "volume", "amt", "oi", "mkt_idx"]]
 new_major_return_df.to_csv(major_return_path, float_format="%.8f", compression="gzip")
