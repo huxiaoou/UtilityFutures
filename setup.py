@@ -7,8 +7,8 @@ import datetime as dt
 
 pd.set_option("display.width", 0)
 
-# DATABASE = os.path.join("E:\\", "Database")
-DATABASE = os.path.join("C:\\", "Users", "huxia", "OneDrive", "文档", "Trading", "Database")
+DATABASE = os.path.join("E:\\", "Database")
+# DATABASE = os.path.join("C:\\", "Users", "huxia", "OneDrive", "文档", "Trading", "Database")
 
 CALENDAR_DIR = os.path.join(DATABASE, "Calendar")
 FUTURES_DIR = os.path.join(DATABASE, "Futures")
