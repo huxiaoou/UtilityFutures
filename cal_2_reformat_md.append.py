@@ -45,8 +45,8 @@ for price_type in ["open", "close"]:
 
     print("size before update:{}".format(len(old_price_df)))
     print("size after  update:{}".format(len(new_price_df)))
-    print(old_price_df.tail())
-    print(new_price_df.tail())
+    # print(old_price_df.tail())
+    # print(new_price_df.tail())
 
     new_price_df = new_price_df.set_index("trade_date")
     new_price_df.to_csv(price_path, float_format="%.2f", compression="gzip")
