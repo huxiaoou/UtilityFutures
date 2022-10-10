@@ -70,6 +70,10 @@ save_path = os.path.join(MAJOR_MINOR_DIR, save_file)
 old_df = pd.read_csv(save_path, dtype=str)
 save_df = pd.concat([old_df, major_minor_df.reset_index().rename(mapper={"index": "trade_date"}, axis=1)])
 save_df = save_df.drop_duplicates(keep="first").sort_values("trade_date", ascending=True)
+if instrument_id == "ZC.CZC":
+    # added @ 2022-10-10
+    # for ZC.CZC may have some duplicates due to few volume at nowadays.
+    save_df = save_df.drop_duplicates(keep="last", subset=["trade_date"])
 
 print("size before update:{}".format(len(old_df)))
 print("size after  update:{}".format(len(save_df)))
