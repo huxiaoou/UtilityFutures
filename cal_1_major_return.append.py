@@ -91,6 +91,9 @@ new_major_return_df = pd.concat([
 new_major_return_df = new_major_return_df.drop_duplicates(keep="first").sort_values("trade_date", ascending=True)
 new_major_return_df["mkt_idx"] = (new_major_return_df["major_return"] / RETURN_SCALE + 1).cumprod()
 
+if instrument_id == "ZC.CZC":
+    new_major_return_df = new_major_return_df.drop_duplicates(keep="last", subset=["trade_date"])
+
 # --- reformat and save
 print("size before update:{}".format(len(old_major_return_df)))
 print("size after  update:{}".format(len(new_major_return_df)))
