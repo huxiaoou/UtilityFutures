@@ -46,7 +46,12 @@ for trade_date in volume_mov_aver_df.index:
     n_contract = t_oi_srs.idxmax()
     if n_contract.split(".")[0][-4:] < trade_date[2:6]:
         n_contract = pre_n_contract
-    d_contract = t_oi_srs[t_oi_srs.index > n_contract].idxmax()
+
+    t_oi_srs_future = t_oi_srs[t_oi_srs.index > n_contract]
+    if len(t_oi_srs_future) > 0:
+        d_contract = t_oi_srs_future.idxmax()
+    else:
+        d_contract = n_contract
 
     # append to data
     major_minor_data[trade_date] = {
