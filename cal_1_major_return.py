@@ -49,13 +49,22 @@ for this_trade_date in input_df.index:
     vo_adj_ratio = 2 if this_trade_date < "20200101" else 1
 
     m_contract = input_df.at[this_trade_date, "major_rtn_contract"]
-    m_this_price = this_md_df.at[m_contract, price_type]
-    m_this_volume = this_md_df.at[m_contract, "volume"] / vo_adj_ratio
-    m_this_amt = 0 if np.isnan(this_md_df.at[m_contract, "amt"]) else this_md_df.at[m_contract, "amt"] / vo_adj_ratio
-    m_this_oi = this_md_df.at[m_contract, "oi"] / vo_adj_ratio
+    if m_contract in this_md_df.index:
+        m_this_price = this_md_df.at[m_contract, price_type]
+        m_this_volume = this_md_df.at[m_contract, "volume"] / vo_adj_ratio
+        m_this_amt = 0 if np.isnan(this_md_df.at[m_contract, "amt"]) else this_md_df.at[m_contract, "amt"] / vo_adj_ratio
+        m_this_oi = this_md_df.at[m_contract, "oi"] / vo_adj_ratio
+    else:
+        m_this_price = np.nan
+        m_this_volume = 0
+        m_this_amt = 0
+        m_this_oi = 0
 
     if prev_md_df is not None:
-        m_prev_price = prev_md_df.at[m_contract, price_type]
+        if m_contract in prev_md_df.index:
+            m_prev_price = prev_md_df.at[m_contract, price_type]
+        else:
+            m_prev_price = np.nan
     else:
         m_prev_price = m_this_price
         print("| {} | {:>6s} | {} | prev date md missing    |".format(dt.datetime.now(), instrument_id, this_trade_date))

@@ -1,5 +1,3 @@
-import numpy as np
-
 from setup import *
 from configure import *
 from custom_funs import cal_major_return
